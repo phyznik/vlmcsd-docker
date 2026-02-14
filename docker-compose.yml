@@ -6,3 +6,11 @@ services:
     ports:
       - "1688:1688"
     restart: always
+    command: ["/usr/bin/vlmcsd", "-D", "-e", "-v"]
+
+    healthcheck:
+      test: ["CMD", "/usr/bin/vlmcs","-t","1","-l","1","127.0.0.1"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
